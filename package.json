@@ -1,10 +1,10 @@
 {
   "name": "it131",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,5 +40,9 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.3.3"
+  },
+  "respository": {
+    "type": "git",
+    "url": "https://github.com/alexako/it131"
   }
 }
