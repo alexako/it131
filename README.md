@@ -1,5 +1,7 @@
 # It131
 
+[Project user interface is located here](https://github.com/alexako/it131-user-interface)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
 ## Development server
