@@ -6,11 +6,13 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var index = require('./routes/index');
 //var chat = require('./routes/chat');
+
+//mysql://b6f104e144b699:eee710dd@us-cdbr-iron-east-05.cleardb.net/heroku_7dfe969979d6a7b?reconnect=true
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'k1udgedit',
-  database: 'projectDB'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWD,
+  database: process.env.DB_DATABASE
 });
 var app = express();
 

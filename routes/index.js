@@ -2,16 +2,17 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
+
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'k1udgedit',
-  database: 'projectDB'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWD,
+  database: process.env.DB_DATABASE
 });
 
 var api = {
   getAll:  function(req, res) {
-          connection.query('SELECT * FROM testTable', function(err, result) {
+          connection.query('SELECT * FROM test', function(err, result) {
             if (err) throw err;
             res.send(result);
           });
