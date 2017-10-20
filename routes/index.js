@@ -12,7 +12,8 @@ var connection = mysql.createConnection({
 
 var api = {
   getAll:  function(req, res) {
-          connection.query('SELECT * FROM test', function(err, result) {
+          var query = "SELECT * FROM bars INNER JOIN address ON bars.address_id = address.id";
+          connection.query(query, function(err, result) {
             if (err) throw err;
             res.send(result);
           });
