@@ -17,12 +17,26 @@ var api = {
             res.send(result);
           });
         },
-  add: function(req, res) {},
-  edit: function(req, res) {},
-  delete: function(req, res) {}
+  getBarByID: function(req, res) {
+          console.log("getBarByID req:", req); 
+        },
+  add: function(req, res) {
+          console.log("add req:", req);
+          // connection.query('INSERT INTO test(name, rating) VALUES ("Test add", 3.0)', function(err, result) { 
+          //   if (err) throw err;
+          //   res.send(result);
+          // })
+        },
+  edit: function(req, res) {
+          console.log("edit req:", req);
+        },
+  delete: function(req, res) {
+          console.log("delete req:", req);
+        }
 }
 
 router.get('/', api.getAll);
+router.get('/:id', api.getBarByID)
 router.post('/post/:id', api.add);
 router.put('/post/:id', api.edit);
 router.delete('/post/:id', api.delete);
