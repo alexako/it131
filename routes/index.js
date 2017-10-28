@@ -24,13 +24,12 @@ var api = {
           }) 
         },
   add: function(req, res) {
-          console.log("add req:", req);
           console.log("add params:", req.params);
-          res.send(req);
-          // connection.query('INSERT INTO test(name, rating) VALUES ("Test add", 3.0)', function(err, result) { 
-          //   if (err) throw err;
-          //   res.send(result);
-          // })
+          var params = Object.values(req.params).map(function(val) { return (typeof val === " ") "'" + val + "'": val; }).join(', ');
+          connection.query('INSERT INTO test(name, rating) VALUES (' + params + ')', function(err, result) { 
+            if (err) throw err;
+            res.send(result);
+          })
         },
   edit: function(req, res) {
           console.log("edit req:", req);
