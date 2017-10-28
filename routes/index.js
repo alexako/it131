@@ -25,7 +25,7 @@ var api = {
         },
   add: function(req, res) {
           console.log("add params:", req.body);
-          connection.query('INSERT INTO test(url, shady_url) VALUES (' + req.body[0].url + ', ' + req.body[0].shady_url + ')', function(err, result) { 
+          connection.query('INSERT INTO test(url, shady_url) VALUE (\'' + req.body[0].url + '\', \'' + req.body[0].shady_url + '\')', function(err, result) { 
             if (err) throw err;
             res.send(result);
           })
