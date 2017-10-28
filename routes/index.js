@@ -41,7 +41,7 @@ var api = {
 
 router.get('/', api.getAll);
 router.get('/:id', api.getBarByID)
-router.post('/post/:id', api.add);
+router.post('/post/', api.add);
 router.put('/post/:id', api.edit);
 router.delete('/post/:id', api.delete);
 
