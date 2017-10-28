@@ -22,10 +22,10 @@ var api = {
         },
   add: function(req, res) {
           console.log("add req:", req);
-          connection.query('INSERT INTO test', function(err, result) { 
-            if (err) throw err;
-            res.send(result);
-          })
+          // connection.query('INSERT INTO test(name, rating) VALUES ("Test add", 3.0)', function(err, result) { 
+          //   if (err) throw err;
+          //   res.send(result);
+          // })
         },
   edit: function(req, res) {
           console.log("edit req:", req);
