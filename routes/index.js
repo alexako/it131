@@ -25,7 +25,7 @@ var api = {
         },
   add: function(req, res) {
           console.log("add params:", req.params);
-          var params = Object.values(req.params).map(function(val) { return (typeof val === " ") "'" + val + "'": val; }).join(', ');
+          var params = Object.values(req.params).map(function(val) { return (typeof val === "string") ? "'" + val + "'": val; }).join(', ');
           connection.query('INSERT INTO test(name, rating) VALUES (' + params + ')', function(err, result) { 
             if (err) throw err;
             res.send(result);
