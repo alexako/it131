@@ -18,9 +18,10 @@ var api = {
           });
         },
   getBarByID: function(req, res) {
-          console.log("getBarByID req:", req); 
-          console.log("getBarByID params:", req.params); 
-          res.send(req);
+          connection.query('SELECT * FROM test WHERE id = ' + req.params.id, function(err, result) {
+            if (err) throw err;
+            res.send(result);
+          }) 
         },
   add: function(req, res) {
           console.log("add req:", req);
