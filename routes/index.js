@@ -12,23 +12,27 @@ var connection = mysql.createConnection({
 
 var api = {
   getAll:  function(req, res) {
-          connection.query('SELECT * FROM test', function(err, result) {
+          connection.query('SELECT * FROM bars', function(err, result) {
             if (err) throw err;
             res.send(result);
           });
         },
   getBarByID: function(req, res) {
-          connection.query('SELECT * FROM test WHERE id = ' + req.params.id, function(err, result) {
+          connection.query('SELECT * FROM bars WHERE id = ' + req.params.id, function(err, result) {
             if (err) throw err;
             res.send(result);
           }) 
         },
   add: function(req, res) {
           console.log("add params:", req.body);
-          connection.query('INSERT INTO test(url, shady_url) VALUE (\'' + req.body[0].url + '\', \'' + req.body[0].shady_url + '\')', function(err, result) { 
-            if (err) throw err;
-            res.send(result);
-          })
+          var address_id;
+          connection.query("INSERT INTO address(street, city, province, zip, country) VALUES ('" + req.body[0].street + "', '" + req.body[0].city + "', '" + req.body[0].province + "', '" + req.body[0].zip + "', '" + req.body[0].country + "')", function(err, addressResult) {
+              if (err) throw err;
+              connection.query("INSERT INTO bars(name, rating, address_id, description) VALUE ('" + req.body[0].name + "', '" + req.body[0].rating + "', '" + addressResult.insertId + "', '" + req.body[0].description + "')", function(err, result) { 
+                if (err) throw err;
+                res.send(result);
+              })
+          });
         },
   edit: function(req, res) {
           console.log("edit req:", req);
@@ -40,9 +44,9 @@ var api = {
 
 router.get('/', api.getAll);
 router.get('/:id', api.getBarByID)
-router.post('/post/', api.add);
-router.put('/post/:id', api.edit);
-router.delete('/post/:id', api.delete);
+router.post('/add/', api.add);
+router.put('/edit/:id', api.edit);
+router.delete('/delete/:id', api.delete);
 
 
 module.exports = router;
