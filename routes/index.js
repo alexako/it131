@@ -19,9 +19,11 @@ var api = {
         },
   getBarByID: function(req, res) {
           console.log("getBarByID req:", req); 
+          res.send(req);
         },
   add: function(req, res) {
           console.log("add req:", req);
+          res.send(req);
           // connection.query('INSERT INTO test(name, rating) VALUES ("Test add", 3.0)', function(err, result) { 
           //   if (err) throw err;
           //   res.send(result);
