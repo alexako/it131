@@ -12,18 +12,31 @@ var connection = mysql.createConnection({
 
 var api = {
   getAll:  function(req, res) {
-          var query = "SELECT * FROM bars INNER JOIN address ON bars.address_id = address.id";
-          connection.query(query, function(err, result) {
+          connection.query('SELECT * FROM test', function(err, result) {
             if (err) throw err;
             res.send(result);
           });
         },
-  add: function(req, res) {},
-  edit: function(req, res) {},
-  delete: function(req, res) {}
+  getBarByID: function(req, res) {
+          console.log("getBarByID req:", req); 
+        },
+  add: function(req, res) {
+          console.log("add req:", req);
+          connection.query('INSERT INTO test', function(err, result) { 
+            if (err) throw err;
+            res.send(result);
+          })
+        },
+  edit: function(req, res) {
+          console.log("edit req:", req);
+        },
+  delete: function(req, res) {
+          console.log("delete req:", req);
+        }
 }
 
 router.get('/', api.getAll);
+router.get('/:id', api.getBarByID)
 router.post('/post/:id', api.add);
 router.put('/post/:id', api.edit);
 router.delete('/post/:id', api.delete);
