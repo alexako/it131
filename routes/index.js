@@ -12,14 +12,14 @@ var connection = mysql.createConnection({
 
 var api = {
   getAll:  function(req, res) {
-          connection.query('SELECT bars.id, bars.name, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id', function(err, result) {
+          connection.query('SELECT bars.id, bars.name, rating, price_range, average_cost_for_two, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id', function(err, result) {
             if (err) throw err;
             res.send(result);
             //connection.end();
           });
         },
   getBarByID: function(req, res) {
-          connection.query('SELECT bars.id, bars.name, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id WHERE bars.id = ' + req.params.id, function(err, result) {
+          connection.query('SELECT bars.id, bars.name, rating, price_range, average_cost_for_two, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id WHERE bars.id = ' + req.params.id, function(err, result) {
             if (err) throw err;
             res.send(result);
             //connection.end();
@@ -43,11 +43,14 @@ var api = {
 
                 var address_id = result.insertId;
 
-                var bar_query = "INSERT INTO bars(name, rating, address_id, description) VALUE ('"
+                var bar_query = "INSERT INTO bars(id, name, rating, address_id, description, price_range, average_cost_for_two) VALUE ('"
+                  + Date.parse(new Date()).toString().slice(0, -3) + "', '"
                   + req.body[0].name + "', '"
                   + req.body[0].rating + "', "
                   + address_id + ", '"
-                  + req.body[0].description
+                  + req.body[0].description + "', '"
+                  + req.body[0].price_range + "', '"
+                  + req.body[0].average_cost_for_two
                   + "');";
 
                 connection.query(bar_query, function(err, result) {
