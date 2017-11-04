@@ -15,10 +15,11 @@ var api = {
           connection.query('SELECT bars.id, bars.name, rating, price_range, average_cost_for_two, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id', function(err, result) {
             if (err) throw err;
             res.send(result);
-            //connection.end();
+            // connection.end();
           });
         },
   getBarByID: function(req, res) {
+          console.log("req:", req);
           connection.query('SELECT bars.id, bars.name, rating, price_range, average_cost_for_two, description, address_id, street, city, province, zip, country FROM bars LEFT JOIN address ON bars.address_id = address.id WHERE bars.id = ' + req.params.id, function(err, result) {
             if (err) throw err;
             res.send(result);
@@ -127,10 +128,10 @@ var api = {
 }
 
 router.get('/', api.getAll);
-router.get('/:id', api.getBarByID)
+router.get('/bar/:id', api.getBarByID);
 router.post('/', api.add);
-router.put('/:id', api.edit);
-router.delete('/:id', api.delete);
+router.put('/bar/:id', api.edit);
+router.delete('/bar/:id', api.delete);
 
 
 module.exports = router;
